@@ -33,3 +33,19 @@ kubectl apply -f src/main/resources/k8s/service.yaml
 #Obtener la ip externa a partir del service
 
 kubectl get svc
+
+# Agregar el repositorio oficial de NGINX Ingress
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+# Actualizar los repositorios para que Helm descargue la lista más reciente de charts
+
+helm repo update
+
+# Instalar el Ingress Controller en tu cluster
+
+helm install ingress-nginx ingress-nginx/ingress-nginx
+
+# ver si ngnix quedó correctamente desplegado:
+
+kubectl get pods -n default

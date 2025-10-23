@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: grupo5-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: grupo5
   ports:
