@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Microservicio - Grupo 5</title>
+    <style>
+        html, body {
+          height: 100%;
+          margin: 0;
+        }
+        body {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+          background: linear-gradient(135deg, #6a11cb 0%, #ff6fb5 100%);
+          color: white;
+        }
+
+        .container {
+          text-align: center;
+          padding: 2rem;
+          max-width: 1100px;
+        }
+
+        h1 {
+          margin: 0 0 1rem 0;
+          font-size: clamp(1.6rem, 3.5vw, 3rem);
+          line-height: 1.05;
+          font-weight: 700;
+          text-shadow: 0 4px 18px rgba(0,0,0,0.18);
+        }
+
+        h3 {
+          margin: 0.6rem 0;
+          font-size: clamp(1rem, 2.2vw, 1.4rem);
+          font-weight: 600;
+          opacity: 0.95;
+        }
+
+        h5 {
+          margin: 1rem 0 0 0;
+          font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+          font-weight: 500;
+          opacity: 0.95;
+          background: rgba(255,255,255,0.06);
+          padding: 0.6rem 1rem;
+          border-radius: 10px;
+          display: inline-block;
+        }
+
+        @media (max-width: 420px) {
+          .container { padding: 1rem; }
+          h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Hola, bienvenido al microservicio del grupo 5 de la Asignatura de Arquitectura de Software de la Universidad de la Sabana</h1>
+    <h3>El microservicio se corre sobre el contenedor: <span th:text="${podName}"></span></h3>
+    <h5>el texto que se trae desde el archivo anexo es: <span th:text="${attachedContent}"></span></h5>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Construir la imagen
+docker build -t grupo5-microservice .
+
+# Ejecutar el contenedor con variable de entorno
+docker run -d --name grupo5-ms-container -p 8080:8080 -e POD_NAME=grupo5-pod grupo5-microservice
