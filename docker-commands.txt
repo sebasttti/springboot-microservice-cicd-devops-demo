@@ -1,5 +1,35 @@
 # Construir la imagen
+
 docker build -t grupo5-microservice .
 
 # Ejecutar el contenedor con variable de entorno
+
 docker run -d --name grupo5-ms-container -p 8080:8080 -e POD_NAME=grupo5-pod grupo5-microservice
+
+# Crear tag de la imagen en docker hub
+
+docker tag grupo5-microservice:latest sebasttti0716/grupo5-microservice:latest
+
+# subir imagen a docker hub
+
+docker push sebasttti0716/grupo5-microservice:latest
+
+# Ver nodo en kubernets
+
+kubectl get nodes
+
+# Ver pods en kuberenets
+
+kubectl get pods
+
+# Aplicar el deployment en kubernetes
+
+kubectl apply -f src/main/resources/k8s/deployment.yaml
+
+#Aplicar el service en kubernetes
+
+kubectl apply -f src/main/resources/k8s/service.yaml
+
+#Obtener la ip externa a partir del service
+
+kubectl get svc

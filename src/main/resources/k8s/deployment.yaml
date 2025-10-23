@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grupo5-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grupo5
+  template:
+    metadata:
+      labels:
+        app: grupo5
+    spec:
+      containers:
+        - name: grupo5-container
+          image: sebasttti0716/grupo5-microservice:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
