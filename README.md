@@ -1,4 +1,4 @@
-# 🧩 Microservicio del Grupo 5 — Arquitectura de Software
+# 🧩 Demo de Microservicio desplegado en Kubernetes
 
 Este proyecto es un **microservicio desarrollado en Java 17 con Spring Boot**, diseñado como parte de la Asignatura **Arquitectura de Software** de la **Universidad de La Sabana**.
 
