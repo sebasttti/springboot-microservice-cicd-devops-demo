@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'principal' }
+    agent any
 
     environment {
         DOCKER_HUB_USER = 'sebasttti0716'
