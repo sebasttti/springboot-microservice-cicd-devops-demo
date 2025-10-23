@@ -7,7 +7,15 @@ pipeline {
         TAG = 'latest'
     }
 
+    agent { label 'principal' }
+
     stages {
+
+        stage('Build') {
+              steps {
+                        echo 'Corriendo en el nodo principal'
+                    }
+              }
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/sebasttti/springboot-microservice-cicd-devops-demo.git'
