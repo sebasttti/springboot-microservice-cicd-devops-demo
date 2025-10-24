@@ -1,1 +1,1 @@
-Este texto corresponde a la version 1004
+Este texto corresponde a la version 10 del release
