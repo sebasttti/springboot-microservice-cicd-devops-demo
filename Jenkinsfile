@@ -20,18 +20,19 @@ pipeline {
                 sh './mvnw clean package -DskipTests'
             }
         }
-        /*
+        
         stage('Build & Push Docker Image') {
             steps {
                 script {
                     // Construir la imagen
-                    def image = docker.build("${REPO}:${GIT_COMMIT}")
+                    sh "docker build -t ${REPO}:${IMAGE_TAG} ."
 
-                    // Subir la imagen
-                    image.push()
+                    // Subir la imagen al registry
+                    sh "docker push ${REPO}:${IMAGE_TAG}"
                 }
             }
         }
-        */
+
+        
     }
 }

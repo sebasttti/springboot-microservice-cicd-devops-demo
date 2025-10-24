@@ -81,3 +81,18 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ## Crear grupo de trabajo
 
 kubectl create namespace jenkins
+
+# Imagen de jenkins con Docker
+
+docker build -f JenkinsDockerfile -t jenkins-docker:latest .
+
+# Imagen local de Jenkins
+
+docker pull jenkins/jenkins:lts
+
+# Contenedor local de Jenkins
+
+docker volume create jenkins_home
+docker run -d --name jenkins_app -p 8080:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts
+apt-get update
+apt-get install docker -y
