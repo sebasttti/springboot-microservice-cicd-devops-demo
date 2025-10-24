@@ -24,10 +24,13 @@ pipeline {
         stage('Build & Push Docker Image') {
             steps {
                 script {
-                    // Construir la imagen
-                    sh "docker build -t ${REPO}:${IMAGE_TAG} ."
+                    // Inicia sesión en Docker Hub usando las credenciales seguras
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-token', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    }
 
-                    // Subir la imagen al registry
+                    // Construir y subir la imagen
+                    sh "docker build -t ${REPO}:${IMAGE_TAG} ."
                     sh "docker push ${REPO}:${IMAGE_TAG}"
                 }
             }
