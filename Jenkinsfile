@@ -11,6 +11,9 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command: ["sleep","infinity"]
+  - name: maven
+    image: maven:3.9.8-eclipse-temurin-17
+    tty: true
 """
         }
     }
@@ -28,7 +31,7 @@ spec:
         }
 
         stage('Build JAR') {
-            steps {
+            container('maven') {
                 sh 'chmod +x mvnw'
                 sh './mvnw clean package -DskipTests'
             }
