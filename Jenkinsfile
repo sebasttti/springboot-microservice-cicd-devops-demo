@@ -19,7 +19,7 @@ spec:
 
     environment {
         REPO = 'sebasttti0716/grupo5-microservice'
-        IMAGE_TAG = "${GIT_COMMIT}" // etiqueta con el SHA del commit
+        IMAGE_TAG = "${BUILD_NUMBER}" // etiqueta con el SHA del commit
     }
 
     stages {
