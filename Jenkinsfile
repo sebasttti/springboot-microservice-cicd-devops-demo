@@ -2,18 +2,12 @@ pipeline {
     agent { label 'principal' }
 
     environment {
-        DOCKER_HUB_USER = 'sebasttti0716'
-        IMAGE_NAME = 'grupo5-microservice'
-        TAG = 'latest'
+        REGISTRY = 'docker.io'
+        REPO = 'sebasttti0716/grupo5-microservice'
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages {
-
-        stage('Build') {
-              steps {
-                        echo 'Corriendo en el nodo principal'
-                    }
-              }
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/sebasttti/springboot-microservice-cicd-devops-demo.git'
@@ -28,13 +22,15 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t ${DOCKER_HUB_USER}/${IMAGE_NAME}:${TAG} ."
+                sh "docker build -t ${REPO}:${IMAGE_TAG} ."
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Push Docker Image (Public)') {
             steps {
-                sh "docker push ${DOCKER_HUB_USER}/${IMAGE_NAME}:${TAG}"
+                sh """
+                    docker push ${REPO}:${IMAGE_TAG}
+                """
             }
         }
     }
