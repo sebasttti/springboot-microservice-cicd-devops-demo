@@ -1,26 +1,10 @@
 pipeline {
-    agent {
-        kubernetes {
-            label 'kaniko-agent'
-            defaultContainer 'kaniko'
-            yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    command: ["sleep","infinity"]
-  - name: maven
-    image: maven:3.9.8-eclipse-temurin-17
-    tty: true
-"""
-        }
-    }
+    agent { label 'principal' }
 
     environment {
+        REGISTRY = 'docker.io'
         REPO = 'sebasttti0716/grupo5-microservice'
-        IMAGE_TAG = "${BUILD_NUMBER}" // etiqueta con el SHA del commit
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages {
@@ -32,24 +16,22 @@ spec:
 
         stage('Build JAR') {
             steps {
-                container('maven') {
-                    sh 'chmod +x mvnw'
-                    sh './mvnw clean package -DskipTests'
-                }
+                sh 'chmod +x mvnw'
+                sh './mvnw clean package -DskipTests'
             }
         }
-
+        /*
         stage('Build & Push Docker Image') {
             steps {
-                container('kaniko') {
-                    sh """
-                    /kaniko/executor \
-                        --dockerfile=Dockerfile \
-                        --context=/workspace/ \
-                        --destination=${REPO}:${IMAGE_TAG}
-                    """
+                script {
+                    // Construir la imagen
+                    def image = docker.build("${REPO}:${GIT_COMMIT}")
+
+                    // Subir la imagen
+                    image.push()
                 }
             }
         }
+        */
     }
 }
