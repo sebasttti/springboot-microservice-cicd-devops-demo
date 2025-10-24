@@ -31,9 +31,11 @@ spec:
         }
 
         stage('Build JAR') {
-            container('maven') {
-                sh 'chmod +x mvnw'
-                sh './mvnw clean package -DskipTests'
+            steps {
+                container('maven') {
+                    sh 'chmod +x mvnw'
+                    sh './mvnw clean package -DskipTests'
+                }
             }
         }
 
