@@ -21,15 +21,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build & Push Docker Image') {
             steps {
-                def image = docker.build("${REPO}:${GIT_COMMIT}")
-            }
-        }
+                script {
+                    // Construir la imagen
+                    def image = docker.build("${REPO}:${GIT_COMMIT}")
 
-        stage('Push Docker Image (Public)') {
-            steps {
-                image.push()
+                    // Subir la imagen
+                    image.push()
+                }
             }
         }
     }
