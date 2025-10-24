@@ -10,6 +10,9 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
+    command:
+    - sleep
+    - infinity
 """
         }
     }
