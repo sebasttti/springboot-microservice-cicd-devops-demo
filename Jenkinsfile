@@ -23,15 +23,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t ${REPO}:${IMAGE_TAG} ."
+                def image = docker.build("${REPO}:${GIT_COMMIT}")
             }
         }
 
         stage('Push Docker Image (Public)') {
             steps {
-                sh """
-                    docker push ${REPO}:${IMAGE_TAG}
-                """
+                image.push()
             }
         }
     }
