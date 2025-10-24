@@ -12,7 +12,7 @@ docker tag grupo5-microservice:latest sebasttti0716/grupo5-microservice:latest
 
 # subir imagen a docker hub
 
-docker push sebasttti0716/grupo5-microservice:latest
+docker push sebasttti0716/grupo5-microservice:{version}
 
 # Ver nodo en kubernets
 
