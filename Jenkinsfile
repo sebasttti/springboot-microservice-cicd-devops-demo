@@ -20,7 +20,7 @@ pipeline {
                 sh './mvnw clean package -DskipTests'
             }
         }
-
+        /*
         stage('Build & Push Docker Image') {
             steps {
                 script {
@@ -32,5 +32,6 @@ pipeline {
                 }
             }
         }
+        */
     }
 }
