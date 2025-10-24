@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: grupo5-container
-          image: sebasttti0716/grupo5-microservice:7
+          image: sebasttti0716/grupo5-microservice:9
           ports:
             - containerPort: 8080
           env:
