@@ -36,6 +36,28 @@ pipeline {
             }
         }
 
+        stage('Update Deployment YAML and Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                    sh """
+                        git config user.email "jenkins@server.local"
+                        git config user.name "Jenkins CI"
+
+                        # Actualizar versión de la imagen
+                        sed -i 's#image: ${REPO}:.*#image: ${REPO}:${IMAGE_TAG}#' src/main/resources/k8s/deployment.yaml
+
+                        # Confirmar cambios
+                        git add src/main/resources/k8s/deployment.yaml
+                        git commit -m "Update image version to ${IMAGE_TAG}" || echo "No changes to commit"
+
+                        # Configurar push con autenticación
+                        git remote set-url origin https://${GIT_USER}:${GIT_TOKEN}@github.com/sebasttti/springboot-microservice-cicd-devops-demo.git
+                        git push origin main
+                    """
+                }
+            }
+        }
+
         
     }
 }
